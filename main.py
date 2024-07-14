@@ -7,6 +7,13 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions 
 
 
+st.set_page_config(
+    page_title="Rock Segmantation",
+    page_icon="🗿",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
 @st.cache_data()
 def load_model():
     return EfficientNetB0(weights='imagenet')
@@ -21,7 +28,7 @@ def preprocess_image(img):
 
 
 def load_image():
-    uploaded_file = st.file_uploader(label='Выберите изображение для распознавания')
+    uploaded_file = st.file_uploader(label='Выберите изображение для сегментации')
     if uploaded_file is not None:
         image_data = uploaded_file.getvalue()
         st.image(image_data)
@@ -34,6 +41,7 @@ def print_predictions(preds):
     classes = decode_predictions(preds, top=3)[0]
     for cl in classes:
         st.write(cl[1], cl[2])
+    
 
 
 model = load_model()
@@ -43,7 +51,7 @@ with st.sidebar:
     st.text("Главный разработчик: Я")
     st.text("Обучатель сети: не Я")
 
-st.title('Новая улучшенная классификации изображений в облаке Streamlit')
+st.title("Сегментация изображения горных пород")
 
 img = load_image()
 result = st.button('Распознать изображение')
@@ -52,5 +60,10 @@ if result:
     preds = model.predict(x)
 
     st.divider()
+
+    st.success('Your edited image was processes! 🎉')
     st.write('**Результаты распознавания:**')
     print_predictions(preds)
+    #st.download_button("Сохранить")
+
+
