@@ -34,14 +34,14 @@ with st.sidebar:
 st.title("Сегментация изображения горных пород")
 
 img = load_image()
-result = st.button('Распознать изображение')
+result = st.button('Сегментировать изображение')
 if result:
     results = model(img)
 
     st.divider()
 
-    st.success('Your edited image was processes! 🎉')
-    st.write('**Результаты распознавания:**')
+    st.success('Ваше изображение успешно обработано! 🎉')
+    st.write('**Результаты сегментиования:**')
 
     result = results[0]
     masks = result.masks
@@ -59,7 +59,7 @@ if result:
     byte_im = buf.getvalue()
 
     st.download_button(
-        label="Download Image",
+        label="Скачать изображение",
         data=byte_im,
         file_name="segmented_rocks.png",
         mime="image/jpeg",
