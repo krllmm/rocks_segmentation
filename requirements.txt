@@ -1,3 +1,5 @@
 streamlit
 ultralytics
-
+BytesIO
+ImageDraw
+Image

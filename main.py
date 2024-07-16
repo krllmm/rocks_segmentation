@@ -1,8 +1,6 @@
 import io
 import streamlit as st
-from PIL import Image
-import numpy as np
-from PIL import ImageDraw
+from PIL import Image, ImageDraw
 from ultralytics import YOLO
 from io import BytesIO
 
