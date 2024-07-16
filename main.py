@@ -30,8 +30,8 @@ model = load_model()
 
 with st.sidebar:
     st.title("Информация о команде")
-    st.text("Главный разработчик: Я")
-    st.text("Обучатель сети: не Я")
+    st.text("Главный разработчик: ")
+    st.text("Обучатель сети: ")
 
 st.title("Сегментация изображения горных пород")
 
@@ -55,7 +55,7 @@ if result:
     segmented = draw._image
 
     st.image(segmented)
-    
+
     buf = BytesIO()
     img.save(buf, format="JPEG")
     byte_im = buf.getvalue()
