@@ -26,25 +26,21 @@ def load_image():
 
 model = load_model()
 
-with st.sidebar:
-    st.title("Информация о команде")
-    st.text("Главный разработчик: ")
-    st.text("Обучатель сети: ")
-
-st.title("Сегментация изображения горных пород")
+st.title("Сегментация изображений горных пород")
 
 img = load_image()
-result = st.button('Сегментировать изображение')
+result = st.button('Сегментировать изображение', type="primary")
 if result:
     results = model(img)
 
     st.divider()
 
-    st.success('Ваше изображение успешно обработано! 🎉')
-    st.write('**Результаты сегментиования:**')
+    st.success('Ваше изображение успешно обработано! 🎉🎉🎉')
+    st.title('**Результат сегментирования:**')
 
     result = results[0]
     masks = result.masks
+    
     for mask in masks:
         polygon = mask.xy[0]
         draw = ImageDraw.Draw(img)
@@ -58,9 +54,16 @@ if result:
     img.save(buf, format="JPEG")
     byte_im = buf.getvalue()
 
-    st.download_button(
+    download = st.download_button(
         label="Скачать изображение",
         data=byte_im,
         file_name="segmented_rocks.png",
         mime="image/jpeg",
+        type="primary",
     )
+
+            
+
+
+
+    
